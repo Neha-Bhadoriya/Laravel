@@ -5,10 +5,20 @@
 <div class="container-fluid">
         <div class="row">
           <div class="col-md-6">
+@if ($errors->any())
+    <div class="alert alert-danger">
+    <ul>
+    @foreach ($errors->all() as $error)
+    <li>{{ $error }}</li>
+    @endforeach
+   </ul>
+   </div>
+   @endif
+
 <div class="card shadow" style="position: relative;
     left: 316px;">
 	<div class="card-body">
-		
+			
 <form action="{{url('front/loginsave')}}" method="post">
 	@csrf
 	
@@ -19,7 +29,9 @@ Email
 password
 <input type="password" name="password" class="form-control">
 <br>
-<input type="submit" name="Login" value="Login" class="btn btn-info">
+<input type="submit" class="btn btn-info" name="Login" value="Login">
+
+<a href="{{url('front/signup')}}" class="btn btn-info">Create an Account</a>
 
 </div>
 </div>

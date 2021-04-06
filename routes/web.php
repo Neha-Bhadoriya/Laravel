@@ -93,13 +93,39 @@ Route::get('admin/contact','ContactController@contact');
 Route::get('admin/contact_form','ContactController@contact_form');
 Route::post('admin/contact_save','ContactController@contact_save');
 
+//notification
+Route::get('admin/notification','NotificationController@notification');
+Route::post('admin/not_save','NotificationController@not_save');
+Route::get('admin/not_edit/{id}','NotificationController@not_edit');
+Route::post('admin/not_update','NotificationController@not_update');
+Route::get('admin/not_delete/{id}','NotificationController@not_delete');
+
+//workshop
+Route::get('admin/workshop','WorkshopController@workshop');
+Route::post('admin/workshop_save','WorkshopController@workshop_save');
+
+Route::get('admin/workshop_edit/{id}','WorkshopController@workshop_edit');
+Route::post('admin/workshop_update','WorkshopController@workshop_update');
+
+//coupon
+Route::get('admin/coupon','CouponController@coupon');
+Route::post('admin/coupon_save','CouponController@coupon_save');
+Route::get('admin/coupon_edit/{id}','CouponController@coupon_edit');
+Route::post('admin/coupon_update','CouponController@coupon_update');
+Route::get('admin/coupon_delete/{id}','CouponController@coupon_delete');
 //course frontended
 Route::get('course_details/{id}','CoursesController@course_details');
+
+// workshopMPct front
+Route::get('front/xiaomi','WorkshopController@Xiaomi_workshop');
+Route::get('front/bentchair','WorkshopController@Bentchair_workshop');
+Route::get('front/mpct','WorkshopController@Mpct_workshop');
+Route::get('front/rjit','WorkshopController@Rjit_workshop');
 
 //add to cart
 Route::post('add_to_cart','AddToCartController@add_to_cart');
 Route::get('cart','AddToCartController@cart');
-
+Route::get('cart/quantity_update/{id}/{course_quantity}','AddToCartController@quantity_update');
 
 
 //front
@@ -124,6 +150,9 @@ Route::get('front/intern','FrontendController@intern');
 Route::get('front/contact','FrontendController@contact');
 
 Route::post('front/contactsave','FrontendController@contactsave');
+
+//checkout
+Route::get('front/checkout','CheckOutController@checkout');
 //Auth
 Auth::routes();
 

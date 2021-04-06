@@ -1,6 +1,35 @@
 @extends("front.master")
 
 @section("content")
+
+<div class="modal fade" id="mymodel" 
+style="padding-right: 17px;
+    display: block;
+    position: absolute;
+    top: 157px;">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-info lg">
+        <h5 class="modal-title" >Notification</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	
+      	@foreach($f as $s)
+        
+        
+			    <h3 class="lead" style="font-style: oblique;"><img src="https://www.rgpv.ac.in/Images/new_icon_blink.gif">&nbsp;&nbsp;{{$s->message}}</h3>
+			
+
+		@endforeach
+
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- home-section 
 			================================================== -->
 		<section id="home-section">

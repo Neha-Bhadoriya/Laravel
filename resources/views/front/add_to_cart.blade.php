@@ -1,5 +1,12 @@
 @extends("front.master")
 @section("content")
+@if(session('message'))
+
+		     <p class ="alert alert-danger">
+		     	{{session('message')}}
+		     </p>
+		     	
+		@endif
 <section class="page-banner-section">
 			<div class="container">
 				<h1>Cart</h1>
@@ -26,12 +33,13 @@
 										<th class="product-name">Product</th>
 										<th class="product-price">Price</th>
 										<th class="product-quantity">Quantity</th>
-										<th class="product-subtotal">Total</th>
+<th class="product-subtotal">Total</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										@foreach($cart as $c)
+<?php $total_amount=0;?>
+@foreach($cart as $c)
 										<td class="product-remove">
 											<a href="#" class="remove">×</a>
 										</td>
@@ -46,10 +54,13 @@
 										<td class="product-price">
 											{{$c->course_price}}
 										</td>
-										<td class="product-quantity">
-											<input type="number" value="1"/>
+<td class="product-quantity">
+<a href="{{url('cart/quantity_update/'.$c->id.'/1')}}">+</a>
+<input type="text" name="course_quantity" value="{{$c->course_quantity}}">
+<a href="{{url('cart/quantity_update/'.$c->id.'/-1')}}">-</a>
 										</td>
-										<td class="product-subtotal">{{$c->course_price}}</td>
+										<td class="product-subtotal">{{$c->course_price*$c->course_quantity}}</td>
+										<?php $total_amount=$total_amount+($c->course_price*$c->course_quantity);?>
 									</tr>
 						@endforeach
 									<tr class="coupon-line"> 
@@ -62,24 +73,24 @@
 							</table>
 						</div>
 					</div>
-					<div class="col-lg-4">
-						<div class="sidebar">
-							<div class="widget cart-widget">
-								<h2>Cart Totals</h2>
-								<table>
-									<tbody>
-										<tr class="cart-subtotal">
-											<th>Subtotal</th>
-											<td>273.99</td>
-										</tr>
-										<tr class="order-total">
-											<th>Total</th>
-											<td>273.99</td>
-										</tr>
-									</tbody>
-								</table>
-								<a href="checkout.html" class="checkout-button">Proceed to checkout</a>
-							</div>
+<div class="col-lg-4">
+	<div class="sidebar">
+	<div class="widget cart-widget">
+<h2>Cart Totals</h2>
+	<table>
+<tbody>
+	<tr class="cart-subtotal">
+		<th>Subtotal</th>
+			<td><?php echo $total_amount;?></td>
+</tr>
+<tr class="order-total">
+<th>Total</th>
+<td><?php echo $total_amount;?></td>
+</tr>
+</tbody>
+</table>
+<a href="{{url('front/login')}}" class="checkout-button">Proceed to checkout</a>
+</div>
 						</div>
 					</div>
 				</div>

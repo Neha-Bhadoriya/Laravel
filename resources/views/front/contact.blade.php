@@ -3,7 +3,9 @@
 @section("content")
 
 		<!-- map section -->
-		<div id="map"></div>
+		
+			<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14318.515683695761!2d78.2091488!3d26.2087469!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x88d563b9d79500ed!2sPN%20INFOSYS!5e0!3m2!1sen!2sin!4v1615941210244!5m2!1sen!2sin" style="width: 100%" height="500" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+		
 		<!-- end map section -->
 
 		<!-- contact-section 

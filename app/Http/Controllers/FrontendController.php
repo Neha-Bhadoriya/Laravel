@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 use App\Banner;
 use App\Navbar;
 use App\Courses;
@@ -13,6 +14,9 @@ use App\OurTeam;
 use App\Placement;
 use App\Intern;
 use App\Contact;
+use App\Notification;
+use Session;
+use App\Cart;
 use Illuminate\Support\Facades\Hash;
 class FrontendController extends Controller
 {
@@ -23,7 +27,8 @@ class FrontendController extends Controller
   	    $c=Courses::all();
   	    $j=Catagory::all();
   	    $k=Bottom::all();
-  return view('front.index',compact('d','u','c','j','k'));
+        $f=Notification::all();
+  return view('front.index',compact('d','u','c','j','k','f'));
   	
   }
 
@@ -53,29 +58,56 @@ public function signup()
 
 public function signupsave(Request $a)
 {
+  $this->validate($a,[
+        "name"=>"required",
+        "email"=>"required",
+        "password"=>"required",
+    ]);  
+
   $r=new User;
   $r->name=$a->name;
   $r->email=$a->email;
   $r->password=Hash::make($a->password);
   $r->save();
+  if($a)
+  {
+    return redirect('front/login')->with('message','signup successfully now you can login');;
+  }
 }
 
 public function login()
 {       $u=Navbar::all();
   return view('front/login',compact('u'));
 }
-public function loginsave(Request $l)
+public function loginsave(Request $b)
 {
-  // print_r($l->all());
-  $d=User::where('email',$l->email)->where('password',$l->password)->get()->first();
-  //print_r($d);
-  if($d)
-  {
-    return redirect('front/signup');
-  }
-  else{
-    return redirect('front/login');
-  }
+//   // print_r($l->all());
+  // $d=User::where('email',$l->email)->where('password',$l->password)->get()->first();
+//   //print_r($d);
+//   if($d)
+//   {
+//     return redirect('front/signup');
+//   }
+//   else{
+//     return redirect('front/login');
+//   }
+// }
+ $this->validate($b,[
+        "email"=>"required",
+        "password"=>"required",
+        
+    ]);  
+
+$session_id=Session::getId();
+  $data=$b->all();
+if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password']]))
+{
+Cart::where('session_id',$session_id)->update(['user_email'=>$data['email']]);
+return redirect("front/checkout")->with('message','Login Successfully');
+        }
+else{
+  return redirect("cart")->with('message','Login Unsuccessfully please try again and check the login details again');
+    }  
 }
 
 public function our_team()

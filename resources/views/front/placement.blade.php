@@ -24,7 +24,7 @@
 						<div class="col-lg-3 col-md-6">
 							<div class="teacher-post">
 								<a href="#">
-<img src="{{ url('/placement/'.$k->placement_image) }}" style=" width: 100%; "></a>
+<img src="{{ url('/placement/'.$k->placement_image) }}" style=" width: 100%;height: 250px "></a>
 	<div class="hover-post">
 		<h2>{{$k->name}}</h2>
 	<span>{{$k->company_name}}</span>
@@ -33,7 +33,7 @@
 									</div>
 								</a>
 							</div>
-						</div>
+					
 						
 					</div>
 					@endforeach

@@ -20,35 +20,31 @@
 			<div class="container">
 
 				<div class="teachers-box">
-					@foreach($m as $c)
+					
 					<div class="row">
-						
+						@foreach($m as $c)
 						<div class="col-lg-3 col-md-6">
-							<div class="teacher-post">
-								<a href="#">
-			<img src="{{ url('/team/'.$c->team_image) }}" style=" width: 100%; ">
-								<div class="hover-post">
-									<h2>{{$c->name}}</h2>
-										<span>{{$c->description}}
+						<div class="teacher-post">
+						<a href="#">
+			<img src="{{ url('/team/'.$c->team_image) }}" style=" width: 100%;height: 250px ">
+						<div class="hover-post">
+						<h2>{{$c->name}}</h2>
+				<span>{{$c->description}}
 
-										</span>
+					</span>
 </div>
 </a>
 </div>
 
 </div>
 
-</div>
+
 @endforeach
 </div>
 </div>
+</div>
 </section>
-
-							
-							
-
-							
-		
-
-		<!-- End teachers section -->
+<!-- End teachers section -->
 @endsection
+
+

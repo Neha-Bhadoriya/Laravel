@@ -149,6 +149,24 @@
             </a>
 
             <li class="nav-item has-treeview menu-open">
+            <a href="{{url('admin/notification')}}" class="nav-link active bg-secondary" style="border-style: double;border-block-color: #1c595a;">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>Notifications</p>
+            </a>
+
+             <li class="nav-item has-treeview menu-open">
+            <a href="{{url('admin/workshop')}}" class="nav-link active bg-secondary" style="border-style: double;border-block-color: #1c595a;">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>Workshop</p>
+            </a>
+
+            <li class="nav-item has-treeview menu-open">
+            <a href="{{url('admin/coupon')}}" class="nav-link active bg-secondary" style="border-style: double;border-block-color: #1c595a;">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>Coupon</p>
+            </a>
+
+            <li class="nav-item has-treeview menu-open">
             <a href="{{ route('logout') }}" class="nav-link active bg-danger" style="border-style: double;" 
             onclick="event.preventDefault();
           document.getElementById('logout-form').submit();">
@@ -156,6 +174,7 @@
           
           {{ __('Logout') }}
           <!--  <p>Lo*+gout</p> --></a>
+          <br><br>
 
   <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
   @csrf

@@ -18,28 +18,27 @@
 			================================================== -->
 		<section class="teachers-section">
 			<div class="container">
+
 				<div class="teachers-box">
+					
 					<div class="row">
-						@foreach($n as $c)
+						@foreach($w as $c)
 						<div class="col-lg-3 col-md-6">
-							<div class="teacher-post">
-								<a href="#">
-			<img src="{{ url('/intern/'.$c->intern_image) }}" style=" width: 100%;height: 250px "></a>
-								<div class="hover-post">
-									<h2>{{$c->name}}</h2>
-										<span>{{$c->company_name}}</span>
-										<span>{{$c->designation}}</span>
-										
-									</div>
-								</a>
-							</div>
+						<div class="teacher-post">
+						<a href="#">
+			<img src="{{ url('/workshop/'.$c->workshop_image) }}" style=" width: 100%;height: 250px ">
 						
-						
-					</div>
-					@endforeach
-					</div>
-				</div>	
-			</div>
-		</section>
-		<!-- End teachers section -->
+</div>
+</a>
+</div>
+@endforeach
+</div>
+
+</div>
+</div>
+
+</section>
+<!-- End teachers section -->
 @endsection
+
+

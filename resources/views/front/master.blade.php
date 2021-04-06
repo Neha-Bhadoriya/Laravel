@@ -3,6 +3,7 @@
 
 <html lang="en" class="no-js">
 <head>
+	<link rel="icon" href="https://www.rgpv.ac.in/Images/new_icon_blink.gif">
 	<title>Studiare</title>
 
 	<meta charset="utf-8">
@@ -16,14 +17,51 @@
 	<link rel="stylesheet" type="text/css" href="{{url('css/fonts/elegant-icons/style.css')}}" media="screen">
 	<link rel="stylesheet" type="text/css" href="{{url('css/fonts/iconfont/material-icons.css')}}" media="screen">
 	<link rel="stylesheet" type="text/css" href="{{url('css/style.css')}}">
+	
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    
 
+<style type="text/css">
+	#loading{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #fff url('https://media.giphy.com/media/jAYUbVXgESSti/giphy.gif')
+  no-repeat center;
+  z-index: 99999;
+</style>
 </head>
+	<body onload="myFunction()">
+  <div id="loading">
+
+</div>
+<script type="text/javascript">
+  
+  var preloader=document.getElementById('loading');
+
+  function myFunction(){
+    preloader.style.display= 'none';
+  }
+  
+</script>
+<script>
+  $(document).ready(function(){
+    $('#mymodel').modal('show');
+
+
+
+  });
+  
+</script>
 <body>
 
 	<!-- Container -->
 	<div id="container">
 		<!-- Header
 		    ================================================== -->
+		    
 		<header class="clearfix">
 
 			<div class="top-line" style="background-color: #009df2!important;"> 
@@ -88,13 +126,26 @@
 							<li class="drop-link">
 								<a href="{{url('front/courses')}}">Courses</a>
 							</li>
-							
+					<li>
+					<a href="#">Workshop<i class="fa fa-caret-down" aria-hidden="true"></i></a>
+
+   <ul class="dropdown" style="left: 124px;text-align: center;">
+   		<li class="drop-link"><a href="{{url('front/xiaomi')}}">Xiaomi Mi Company</a></li>
+        <li class="drop-link"><a href="{{url('front/bentchair')}}">BentChair Company</a></li>
+   	    <li class="drop-link"><a href="{{url('front/mpct')}}">Mpct Company</a></li>
+   		<li class="drop-link"><a href="{{url('front/rjit')}}">Rjit Company</a>
+   		</li>
+   		</ul>
+                   </li>
 							<li><a href="{{url('front/our_team')}}">Our Team</a></li>
 							<li><a href="{{url('front/placement')}}">Placements</a></li>
 							<li><a href="{{url('front/intern')}}">Interns</a></li>
 							<li><a href="{{url('front/contact')}}">Contact</a></li>
 						</ul>
 						<a href="{{url('front/login')}}" class="register-modal-opener login-button"> Login</a>
+						<a href="{{route('logout')}}" class="register-modal-opener login-button"
+						onclick="event.preventDefault();
+          document.getElementById('logout-form').submit();"> Logout</a>
 						<a href="{{url('front/signup')}}" class="register-modal-opener login-button"> Signup</a>
 					</div>
 				</div>
@@ -118,71 +169,39 @@
 				</div>
 				<nav class="mobile-nav">
 					<ul class="mobile-menu-list">
-						<li>
-							<a href="index.html">Home</a>
-						</li>
-						<li class="drop-link">
-							<a href="#">Pages</a>
-							<ul class="drop-level">
-								<li><a href="about.html">About Us</a></li>
-								<li><a href="pricing.html">Pricing Packages</a></li>
-								<li><a href="portfolio.html">Portfolio</a></li>
-								<li><a href="single-project.html">Portfolio Single</a></li>
-								<li><a href="teachers.html">Teachers</a></li>
-								<li><a href="single-teacher.html">Teacher Single</a></li>
-								<li><a href="cart.html">Shopping Cart</a></li>
-								<li><a href="checkout.html">Checkout</a></li>
-								<li><a href="single-teacher.html">Teacher Single</a></li>
-								<li class="drop-link">
-									<a href="#">Submenu Level 1</a>
-									<ul class="drop-level">
-										<li><a href="#">Submenu Level 2</a></li>
-										<li class="drop-link">
-											<a href="#">Submenu Level 2</a>
-											<ul class="drop-level">
-												<li><a href="#">Submenu Level 3</a></li>
-												<li><a href="#">Submenu Level 3</a></li>
-											</ul>
-										</li>
-										<li><a href="#">Submenu Level 2</a></li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-						<li class="drop-link">
-							<a href="blog.html">Blog</a>
-							<ul class="drop-level">
-								<li class="drop-link">
-									<a href="blog-list.html">Blog List</a>
-									<ul class="drop-level">
-										<li><a href="blog-list-leftsidebar.html">Blog List - Sidebar Left</a></li>
-										<li><a href="blog-list-rightsidebar.html">Blog List - Sidebar Right</a></li>
-										<li><a href="blog-list.html">No Sidebar</a></li>
-									</ul>
-								</li>
-								<li class="drop-link">
-									<a href="blog-grid-3.html">Blog Grid</a>
-									<ul class="drop-level">
-										<li><a href="blog-grid-3.html">3 Column</a></li>
-										<li><a href="blog-grid-4.html">4 Column</a></li>
-										<li><a href="blog-grid-leftsidebar.html">Sidebar Left</a></li>
-										<li><a href="blog-grid-rightsidebar.html">Sidebar Right</a></li>
-									</ul>
-								</li>
-								<li><a href="blog.html">Blog Classic</a></li>
-								<li><a href="single-post.html">Post Single</a></li>
-							</ul>
-						</li>
-						<li>
-							<a href="courses.html">Courses</a>
-						</li>
-						<li>
-							<a href="events.html">Events</a>
-						</li>
-						<li>
-							<a href="contact.html">Contact</a>
-						</li>
-					</ul>
+						
+							<li class="drop-link">
+								<a class="active" href="{{url('front')}}">Home</a>
+							</li>
+							
+							<li class="drop-link">
+								<a href="{{url('front/courses')}}">Courses</a>
+							</li>
+					<li>
+					<a href="#">Workshop<i class="fa fa-caret-down" aria-hidden="true"></i></a>
+
+   <ul class="dropdown" style="left: 124px;text-align: center;">
+   		<li class="drop-link"><a href="{{url('front/xiaomi')}}">Xiaomi Mi Company</a></li>
+        <li class="drop-link"><a href="{{url('front/bentchair')}}">BentChair Company</a></li>
+   	    <li class="drop-link"><a href="{{url('front/mpct')}}">Mpct Company</a></li>
+   		<li class="drop-link"><a href="{{url('front/rjit')}}">Rjit Company</a>
+   		</li>
+   		</ul>
+                   </li>
+							<li><a href="{{url('front/our_team')}}">Our Team</a></li>
+							<li><a href="{{url('front/placement')}}">Placements</a></li>
+							<li><a href="{{url('front/intern')}}">Interns</a></li>
+							<li><a href="{{url('front/contact')}}">Contact</a></li>
+							
+						</ul>
+						<a href="{{url('front/login')}}" class="register-modal-opener login-button"> Login</a>
+
+						<a href="{{ route('logout')}}" class="register-modal-opener login-button"> Logout</a>
+						
+	
+						<a href="{{url('front/signup')}}" class="register-modal-opener login-button"> Signup</a>
+					</div>
+				</div>
 				</nav>
 			</div>
 
