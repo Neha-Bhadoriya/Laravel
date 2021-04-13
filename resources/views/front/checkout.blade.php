@@ -28,49 +28,49 @@
 					<div class="col-lg-8">
 						<div class="cart-box">
 							<h2>Billing details</h2>
-							<form class="billing-details">
+<form class="billing-details" method="post" action="{{url('front/ordersave')}}">
+	@csrf
+						
 								<div class="row">
 									<div class="col-lg-6">
-										<label for="first-name">First Name*</label>
-										<input type="text" id="first-name" />
+
+										<label for="first-name">Name*</label>
+<input  name="name" type="text" id="first-name" / value="{{Auth::user()->name }}">
 									</div>
-									<div class="col-lg-6">
-										<label for="last-name">Last Name*</label>
-										<input type="text" id="last-name" />
-									</div>
+									
 								</div>
-								<label for="company-name">Company name (optional)</label>
-								<input type="text" id="company-name" />
+								
 								<label for="country">Country*</label>
-								<select id="country">
+								<select id="country" name="country">
 									<option>Country...</option>
-									<option>Albania</option>
-									<option>USA</option>
-									<option>Canada</option>
-									<option>Brazil</option>
-									<option>Germany</option>
-									<option>England</option>
-									<option>France</option>
-									<option>Italy</option>
-									<option>Australia</option>
+									<option value="Albania">Albania</option>
+									<option value="USA">USA</option>
+									<option value="Canada">Canada</option>
+									<option value="Brazil">Brazil</option>
+									<option value="Germany">Germany</option>
+									<option value="England">England</option>
+									<option value="France">France</option>
+									<option value="Italy">Italy</option>
+									<option value="Australia">Australia</option>
 								</select>
-								<label for="street-name">Street address *</label>
-								<input type="text" id="street-name" placeholder="House number and street name" />
-								<input type="text" id="street-name2" placeholder="Apartment, suite, unit etc. (optional)" />
+								<label for="street-name">Address *</label>
+								<input type="text" id="street-name"  name="address" placeholder="House number and street name" />
+								
 								<label for="city-name">Town / City*</label>
-								<input type="text" id="city-name" />
-								<label for="state-name">State / Country*</label>
-								<input type="text" id="state-name" />
+								<input type="text" id="city-name" name="city" />
+								<label for="state-name">State*</label>
+								<input type="text" id="state-name" / name="state">
 								<label for="postcode-name">Postcode / Zip*</label>
-								<input type="text" id="postcode-name" />
+								<input type="text" id="postcode-name" / name="pincode">
 								<label for="phone-name">Phone*</label>
-								<input type="text" id="phone-name" />
+								<input type="text" id="phone-name" / name="phone">
 								<label for="email-address">Email Address*</label>
-								<input type="text" id="email-address" />
+								<input type="text" id="email-address" / name="email" value="{{Auth::user()->email }}">
+								<input type="text" name="user_id" value="{{Auth::user()->id}}">
 								<h2>Additional information</h2>
 								<label for="notes">Order notes (optional)</label>
-								<textarea id="notes" placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
-							</form>
+								<textarea id="notes" placeholder="Notes about your order, e.g. special notes for delivery" name="order_notes"></textarea>
+							
 						</div>
 					</div>
 					<div class="col-lg-4">
@@ -79,33 +79,37 @@
 								<h2>Your order</h2>
 								<table>
 									<tbody>
-										<tr>
+	<tr>
+
 											<td>Product</td>
 											<td>Total</td>
 										</tr>
+	<?php $total_amount=0;?>									
 										<tr>
-											<td class="name-pro">Introduction Web Design with HTML  × 1</td>
-											<td>$244</td>
-										</tr>
-										<tr>
-											<td class="name-pro">Distance Learning MBA Management  × 1</td>
-											<td>$29.99</td>
-										</tr>
-										<tr class="order-total">
-											<th>Subtotal</th>
-											<td>273.99</td>
-										</tr>
-										<tr class="order-total">
-											<th>Total</th>
-											<td class="total-price">273.99</td>
-										</tr>
-									</tbody>
-								</table>
-								<a href="#" class="checkout-button">Proceed to Paypal</a>
-							</div>
-						</div>
-					</div>
+@foreach($cart as $c)
+<td class="name-pro">{{$c->course_name}}
+x {{$c->course_quantity}}</td>
+<?php $total_amount=$total_amount+($c->course_price*$c->course_quantity);?>
+<td>{{$c->course_price*$c->course_quantity}}</td>
+</tr>
+@endforeach
+<tr class="order-total">
+<th>Subtotal</th>
+<td><?php echo $total_amount;?></td>
+</tr>
+<tr class="order-total">
+<th>Total</th>
+<td class="total-price"><?php echo $total_amount;?></td>
+</tr></tbody></table>
+<!-- <a href="#" class="checkout-button">Proceed to complete</a> -->
+<input type="submit" name="submit" value="Proceed to complete" class="btn btn-warning">
+
+
+</div>
+</div>
+</div>
 				</div>
+				</form>
 			</div>
 		</section>
 		<!-- End cart section -->

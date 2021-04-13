@@ -2,7 +2,7 @@
 @section("content")
 @if(session('message'))
 
-		     <p class ="alert alert-danger">
+		     <p class ="alert alert-success">
 		     	{{session('message')}}
 		     </p>
 		     	
@@ -60,7 +60,7 @@
 <a href="{{url('cart/quantity_update/'.$c->id.'/-1')}}">-</a>
 										</td>
 										<td class="product-subtotal">{{$c->course_price*$c->course_quantity}}</td>
-										<?php $total_amount=$total_amount+($c->course_price*$c->course_quantity);?>
+<?php $total_amount=$total_amount+($c->course_price*$c->course_quantity);?>
 									</tr>
 						@endforeach
 									<tr class="coupon-line"> 
@@ -89,7 +89,16 @@
 </tr>
 </tbody>
 </table>
+
+<!-- <a href="{{url('front/checkout')}}" class="checkout-button">Proceed to checkout</a> -->
+
+@if(Auth::check())
+<a href="{{url('front/checkout')}}" class="checkout-button">Proceed to checkout</a>
+@else
 <a href="{{url('front/login')}}" class="checkout-button">Proceed to checkout</a>
+	
+@endif
+	
 </div>
 						</div>
 					</div>

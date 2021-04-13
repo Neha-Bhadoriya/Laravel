@@ -19,10 +19,13 @@ class AddToCartController extends Controller
     {
     	// echo "neha";
     	//print_r($a->all());
+      if(Auth::check())
+      {
 $session_id=Session::getId();
 // print_r($session_id);
 // die;
-
+$session_id=Session::getId();
+$user_email=Auth::User()->email;
     	$r=new Cart;
     	$r->course_id=$a->course_id;
     	$r->course_name=$a->course_name;
@@ -37,6 +40,27 @@ $session_id=Session::getId();
     		return redirect('cart');//route name
     	}
     }
+    else
+    {
+      $session_id=Session::getId();
+// print_r($session_id);
+// die;
+
+      $r=new Cart;
+      $r->course_id=$a->course_id;
+      $r->course_name=$a->course_name;
+      $r->course_price=$a->course_price;
+      $r->image=$a->course_image;
+      $r->session_id=$session_id;
+      $r->save();
+      // print_r($r);
+      // die;
+      if($r)
+      {
+        return redirect('cart');//route name
+      }
+    }
+  }
   public function cart()
   {
 $session_id=Session::getId();
@@ -60,7 +84,7 @@ $session_id=Session::getId();
       // print_r($cart);
       // die;
     }
-  	return view('front.add_to_cart',compact('u','cart'));
+  	return view('front/add_to_cart',compact('u','cart'));
   }
 
   public function quantity_update($id=null,$course_quantity=null)

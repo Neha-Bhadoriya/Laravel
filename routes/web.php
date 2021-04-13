@@ -153,7 +153,13 @@ Route::post('front/contactsave','FrontendController@contactsave');
 
 //checkout
 Route::get('front/checkout','CheckOutController@checkout');
+Route::post('front/ordersave','CheckOutController@ordersave');
+//thanks
+Route::get('front/thanks','CheckOutController@thanks');
 //Auth
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//logout front
+Route::get('front/logout','FrontendController@front_logout');

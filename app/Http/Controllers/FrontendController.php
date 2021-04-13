@@ -103,10 +103,10 @@ $session_id=Session::getId();
 if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password']]))
 {
 Cart::where('session_id',$session_id)->update(['user_email'=>$data['email']]);
-return redirect("front/checkout")->with('message','Login Successfully');
+return redirect("cart")->with('message','Login Successfully');
         }
 else{
-  return redirect("cart")->with('message','Login Unsuccessfully please try again and check the login details again');
+  return redirect("front/login")->with('message','Login Unsuccessfully please try again and check the login details again');
     }  
 }
 
@@ -159,5 +159,18 @@ public function contactsave(Request $c)
         {
          return redirect('front/contact');
         }
+
+
 }
+
+
+public function front_logout(Request $request)
+ {
+        Auth::logout();
+        return redirect('front/login');
+     }
+
+
+
+     
 }

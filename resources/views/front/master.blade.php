@@ -77,6 +77,11 @@
 							<div class="right-top-line">
 								<ul class="top-menu">
 									<li><a href="#" class="text-white">Purchase Now</a></li>
+									@if(Auth::check())
+									<button class="shop-icon">
+									<a href="{{url('front/logout')}}" class="text-white">logout</a>
+								    </button>
+									@endif
 									<li><a href="about.html" class="text-white">About</a></li>
 									<li><a href="blog.html" class="text-white">News</a></li>
 								</ul>
@@ -143,9 +148,14 @@
 							<li><a href="{{url('front/contact')}}">Contact</a></li>
 						</ul>
 						<a href="{{url('front/login')}}" class="register-modal-opener login-button"> Login</a>
-						<a href="{{route('logout')}}" class="register-modal-opener login-button"
-						onclick="event.preventDefault();
-          document.getElementById('logout-form').submit();"> Logout</a>
+						
+					@if(Auth::check())
+									
+									<a href="{{url('front/logout')}}" class=" register-modal-opener login-button">logout</a>
+								    </button>
+									@endif	
+						
+	
 						<a href="{{url('front/signup')}}" class="register-modal-opener login-button"> Signup</a>
 					</div>
 				</div>
@@ -196,7 +206,7 @@
 						</ul>
 						<a href="{{url('front/login')}}" class="register-modal-opener login-button"> Login</a>
 
-						<a href="{{ route('logout')}}" class="register-modal-opener login-button"> Logout</a>
+						<a href="{{ url('front/login')}}" class="register-modal-opener login-button"> Logout</a>
 						
 	
 						<a href="{{url('front/signup')}}" class="register-modal-opener login-button"> Signup</a>
