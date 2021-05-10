@@ -40,8 +40,8 @@
 									
 								</div>
 								
-								<label for="country">Country*</label>
-								<select id="country" name="country">
+<label for="country">Country*</label>
+<select id="country" name="country">
 									<option>Country...</option>
 									<option value="Albania">Albania</option>
 									<option value="USA">USA</option>
@@ -52,7 +52,7 @@
 									<option value="France">France</option>
 									<option value="Italy">Italy</option>
 									<option value="Australia">Australia</option>
-								</select>
+</select>								
 								<label for="street-name">Address *</label>
 								<input type="text" id="street-name"  name="address" placeholder="House number and street name" />
 								
@@ -72,7 +72,7 @@
 								<textarea id="notes" placeholder="Notes about your order, e.g. special notes for delivery" name="order_notes"></textarea>
 							
 						</div>
-					</div>
+					</div>								
 					<div class="col-lg-4">
 						<div class="sidebar">
 							<div class="widget cart-widget">

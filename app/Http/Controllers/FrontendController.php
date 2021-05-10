@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+
 use App\Banner;
 use App\Navbar;
 use App\Courses;
@@ -15,6 +16,8 @@ use App\Placement;
 use App\Intern;
 use App\Contact;
 use App\Notification;
+use App\CourseOrder;
+use App\CourseOrderProduct;
 use Session;
 use App\Cart;
 use Illuminate\Support\Facades\Hash;
@@ -171,6 +174,21 @@ public function front_logout(Request $request)
      }
 
 
-
-     
+public function account()
+{       $u=Navbar::all();
+        $cart=Cart::all();
+        $corder=CourseOrder::all();
+  return view('front/account',compact('u','cart','corder'));
 }
+   
+
+   public function resetpass()
+
+ {
+  $u=Navbar::all();
+    return view('front/resetpass',compact('u'));
+     }
+ }
+      
+
+  

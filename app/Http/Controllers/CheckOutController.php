@@ -10,6 +10,7 @@ use App\CourseOrder;
 use Auth;
 use App\CourseOrderProduct;
 use DB;
+use App\Order;
 class CheckOutController extends Controller
 {
     public function checkout()
@@ -78,8 +79,25 @@ public function thanks()
 {
     $u=Navbar::all();
     $user_email=Auth::user()->email;
-    DB::tanh('carts')->where('user_email',$user_email)->delete();
+    DB::table('carts')->where('user_email',$user_email)->delete();
 return view('front/thanks',compact('u'));
 }
 
+
+public function order()
+   {
+
+$users = DB::table('course_orders')
+
+->join('course_order_products',
+    'course_order_products.user_id',
+    'course_orders.user_id')
+
+->get();
+
+     return view('admin.order',compact('users'));
+   }
+
+  
+    
 }

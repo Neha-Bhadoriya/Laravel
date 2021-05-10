@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Navbar;
-
+use App\CourseOrder;
+use App\CourseOrderProduct;
 class navbarController extends Controller
 {
     public function navbar_footer()
@@ -96,4 +97,13 @@ $file->move("logo/",$filename);
       }
     }
 
+
+
+public function bill($id)
+{
+  $d=Navbar::all();
+  $corder=CourseOrder::all();
+  $corderd=CourseOrderProduct::all();
+  return view("admin.invoice",compact('d','corder','corderd','id'));
+}
 }

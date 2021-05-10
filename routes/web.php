@@ -143,6 +143,7 @@ Route::get('front/login','FrontendController@login');
 
 Route::post('front/loginsave','FrontendController@loginsave');
 
+
 Route::get('front/our_team','FrontendController@our_team');
 Route::get('front/placement','FrontendController@placement');
 Route::get('front/intern','FrontendController@intern');
@@ -151,9 +152,23 @@ Route::get('front/contact','FrontendController@contact');
 
 Route::post('front/contactsave','FrontendController@contactsave');
 
+//Account
+Route::get('front/account','FrontendController@account');
+
+Route::get('front/resetpass','FrontendController@resetpass');
+
+
 //checkout
 Route::get('front/checkout','CheckOutController@checkout');
 Route::post('front/ordersave','CheckOutController@ordersave');
+
+//invoice
+
+Route::get('admin/invoice/{id}','CheckOutController@invoice');
+
+//order
+
+Route::get('admin/order','CheckOutController@order');
 //thanks
 Route::get('front/thanks','CheckOutController@thanks');
 //Auth
@@ -163,3 +178,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //logout front
 Route::get('front/logout','FrontendController@front_logout');
+
+//Bill
+
+Route::get('admin/invoice/{id}','NavbarController@bill');
+

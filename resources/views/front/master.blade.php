@@ -71,17 +71,24 @@
 							@foreach($u as $n)
 							<p><i class="material-icons ">phone</i> <span class="text-white">{{$n->number}}</span></p>
 							<p><i class="material-icons ">email</i> <span class="text-white">{{$n->email}}</span></p>
+							@if(Auth::check())
+							<p class="text-white">{{Auth::user()->name}}</p>
+									@endif
+
+									@if(Auth::check())
+									<button>
+									<a href="{{url('front/logout')}}" class=" btn btn-primary ">Logout</a>
+								    </button>
+									@endif
 							@endforeach
 						</div>
 						<div class="col-lg-6">
 							<div class="right-top-line">
 								<ul class="top-menu">
-									<li><a href="#" class="text-white">Purchase Now</a></li>
-									@if(Auth::check())
-									<button class="shop-icon">
-									<a href="{{url('front/logout')}}" class="text-white">logout</a>
-								    </button>
-									@endif
+									
+
+									<li><a href="{{url('front/account')}}" class="text-white">Account</a></li>
+									
 									<li><a href="about.html" class="text-white">About</a></li>
 									<li><a href="blog.html" class="text-white">News</a></li>
 								</ul>
@@ -149,12 +156,7 @@
 						</ul>
 						<a href="{{url('front/login')}}" class="register-modal-opener login-button"> Login</a>
 						
-					@if(Auth::check())
-									
-									<a href="{{url('front/logout')}}" class=" register-modal-opener login-button">logout</a>
-								    </button>
-									@endif	
-						
+					
 	
 						<a href="{{url('front/signup')}}" class="register-modal-opener login-button"> Signup</a>
 					</div>

@@ -1,5 +1,5 @@
 @extends("front.master")
 @section("content")
 
-<h1>xnjjdjs</h1>
+<h1>Thanku Your Order is placed...:)</h1>
 @endsection

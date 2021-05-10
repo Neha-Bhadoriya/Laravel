@@ -40,7 +40,7 @@ password
 <input type="password" name="password" class="form-control">
 <br>
 <input type="submit" class="btn btn-info" name="Login" value="Login">
-
+<a href="{{ route('password.update') }}" class="btn btn-info">Forgot Password</a>
 <a href="{{url('front/signup')}}" class="btn btn-info">Create an Account</a>
 
 </div>

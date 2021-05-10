@@ -69,7 +69,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{url('backend/dist/img/tt.jpg')}}" class="img-circle elevation-2 " alt="User Image" style="height: 42px;width: 67px;">
+          <img src="{{url('backend/dist/img/neha3.jpg')}}" class="img-circle elevation-2 " alt="User Image" style="height: 67px;width: 90px;">
         </div>
         <div class="info">
           <a href="#" class="d-block text-white">{{Auth::user()->name}}</a>
@@ -164,6 +164,12 @@
             <a href="{{url('admin/coupon')}}" class="nav-link active bg-secondary" style="border-style: double;border-block-color: #1c595a;">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>Coupon</p>
+            </a>
+
+            <li class="nav-item has-treeview menu-open">
+            <a href="{{url('admin/order')}}" class="nav-link active bg-secondary" style="border-style: double;border-block-color: #1c595a;">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>Order Details</p>
             </a>
 
             <li class="nav-item has-treeview menu-open">
