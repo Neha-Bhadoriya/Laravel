@@ -33,8 +33,7 @@ $user_email=Auth::User()->email;
     	$r->image=$a->course_image;
       $r->session_id=$session_id;
     	$r->save();
-      // print_r($r);
-      // die;
+      
     	if($r)
     	{
     		return redirect('cart');//route name

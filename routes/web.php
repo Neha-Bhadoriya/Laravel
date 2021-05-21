@@ -154,7 +154,8 @@ Route::post('front/contactsave','FrontendController@contactsave');
 
 //Account
 Route::get('front/account','FrontendController@account');
-
+//user order data
+Route::get('front/user_order_data','FrontendController@user_order_data');
 Route::get('front/resetpass','FrontendController@resetpass');
 
 

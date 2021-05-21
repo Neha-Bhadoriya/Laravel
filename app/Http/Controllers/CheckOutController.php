@@ -66,10 +66,14 @@ $cartproduct=DB::table('carts')->where(['user_email'=>$a->email])->get();
     // print_r($cartproduct);
 
 
-    	if($t)
+    	if($t['payment_method']=="cod")
     	{
     		return redirect('front/thanks');
     	}
+        elseif($t['payment_method']=="Paytm")
+        {
+            echo "Paytm";
+        }
 
 
 

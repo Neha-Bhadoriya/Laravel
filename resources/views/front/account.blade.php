@@ -1,97 +1,49 @@
 @extends("front.master")
+@section("title",'profile | pneducation')
+
 @section("content")
-@if(session('message'))
-
-		     <p class ="alert alert-success">
-		     	{{session('message')}}
-		     </p>
-		     	
-		@endif
-		 <!-- Table row -->
-		 <!-- info row -->
-		 <br>
-		 <div class="container">
-		 <cener><p class="lead text-info">Hello {{Auth::user()->name}},<br><br> Your Full Profile With Account Details Here..... <br>You can also <b class="text-success lead">Update Your Password</b><br> As Well As <b class="text-danger lead">Cancel The Course Order Details....</b></p></div></cener>
-		 <br>
-<center><h1>User Profile Details</h1></center>
-		 <div class="container bg-light">
-          <div class="row">
-               <div class="col-md-4 invoice-col">
-               <br>
-              
-                  @foreach($corder as $a)
-                  
-                  <address>
-                    <strong>Name:</strong><br>{{$a->name}}<br>
-                   <strong> Phone:</strong><br> {{$a->phone}}
-                   <br>
-                    <strong>Email:</strong><br> {{$a->user_email}}
-                </div>
-                <div class="col-md-4 ">
-                <br>
-                   <strong>Address:</strong><br>{{$a->address}}
-                   <br>
-                    <strong>City:</strong><br>{{$a->city}}  
-                    <br>  
-                    <strong>Country:</strong><br>{{$a->state}}
-                    <br>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <?php $count=0; ?>
+                @foreach($data as $d)
+                @if((Auth::user()->name==$d->name)&&($count==0))
+                <div class="col-md-10 table-bordered bg-light" style="margin: 20px;padding: 40px;">
+                    <h4><span style="border-bottom: 2px solid black"><i class="fa fa-user-circle" aria-hidden="true"></i> User Profile Details </span></h4><br>
+                    <div class="row">
+                    <div class="col-md-6">
+                    <h6>Name:</h6><h6 class="text-primary">{{ Auth::user()->name }}</h6>
+                    <h6>Email:</h6><h6 class="text-primary">{{ Auth::user()->email }}</h6>
+                    <h6>Address:</h6><h6 class="text-primary">{{$d->address}}</h6>
                     </div>
-                  </address>
-                 
-                  @endforeach
-                </div> </div>
-                  
-		 <br><br>
-		 <center>
-              	<h1>Your Course Order Details</h1>
-              </center>
-		 <div class="container">
-              <div class="row">
+                    <div class="col-md-4">
+                    <h6>City:</h6><h6 class="text-primary">{{$d->city}}</h6> 
+                    <h6>State:</h6><h6 class="text-primary">{{$d->state}}</h6>
+                    <h6>Pincode:</h6><h6 class="text-primary">{{$d->pincode}}</h6>
+                    <h6>Country:</h6><h6 class="text-primary">{{$d->country}}</h6>
+                    </div>
+                    </div>
+                    <?php $count+=1; ?> 
+                    <div class="row">
+                        <div class="col-md-2">
+                        <button class="btn btn-success">            
+                        <a href="{{url('front/user_order_data')}}"><span class="text-white">Your Orders</span></a>
+                        </button><br>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-success">            
+                        <a href=""><span class="text-white">Update Password</span></a>
+                        </button>
+                    </div>
+                    </div>       
+                </div>
+                @endif
+                @endforeach
+                <div class="col-md-1"></div>
+                
+            </div>
+        </div>
+    </div>
 
-                <div class="col-12 table-responsive">
-                  <table class="table table-striped">
-                    <thead>
-                    <tr>
-                      <th>S.No.#</th>
-                      <th>Username</th>
-                      <th>Course Name</th>
-                      <th>Course Qty</th>
-                      <th>Course Price</th>
-                      <th>Course Image</th>
-                      <th>Subtotal</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    	<?php $i=1;?>
-                    	<?php $total_amount=0;?>
-@foreach($cart as $c)
-<td>{{$i}}</td>
-<td>{{Auth::user()->name}}</td>
-<td >{{$c->course_name}}</td>
-<td> {{$c->course_quantity}}</td>
-<td>{{$c->course_price}}</td>
-<td><img src="{{ url('/upload/'.$c->image) }}" style="height: 110px; width: 110px; border-radius: 100%;"></td>
-<?php $total_amount=$total_amount+($c->course_price*$c->course_quantity);?>
-<td>{{$c->course_price*$c->course_quantity}}</td>
-</tr>
-<?php $i++;?>
-
-    
-	@endforeach
-
-</tr></tbody></table></div></div></div>
-		<center>
-			<br>
-			
-	<p>You Can Reset Your Password</p>
-
-  
-		<button><a href="{{url('front/resetpass')}}" class="btn btn-success">Reset Password</a></button>
-		
-		<br><br>
-	<p>You Can Cancel your Order</p>
-		<button><a href="" class="btn btn-danger">Cancel Order</a></button>
-	</center>
-	<br><br>
-	
-		@endsection
+@endsection

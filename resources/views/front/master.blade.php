@@ -421,6 +421,19 @@
 		}); /*ready*/
 	</script>	
 
-	
+	<script type="text/javascript">
+function selectpayment_method()
+{
+			// alert('hello itm');
+  if($('.stripe').is(':checked') || $('.cod').is(':checked') || $('.Paytm').is(':checked') || $('.Instamojo').is(':checked') || $('.Razorpay').is(':checked') )
+  {
+      alert('checked');
+    }
+    else{
+      alert('Please select payment method');
+      return false;
+        }
+}
+	</script>
 </body>
 </html>

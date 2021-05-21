@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
-
+use DB;
 use App\Banner;
 use App\Navbar;
 use App\Courses;
@@ -174,12 +174,25 @@ public function front_logout(Request $request)
      }
 
 
+// public function account()
+// {       $u=Navbar::all();
+//         $cart=Cart::all();
+//         $corder=CourseOrder::all();
+//   return view('front/account',compact('u','cart','corder'));
+// }
 public function account()
-{       $u=Navbar::all();
-        $cart=Cart::all();
-        $corder=CourseOrder::all();
-  return view('front/account',compact('u','cart','corder'));
-}
+    {
+        $u=Navbar::all();
+        $data= DB::table('course_orders')->join('course_order_products','course_orders.user_id','course_order_products.user_id')->get();
+        return view('front/account',compact('u','data'));
+    }
+
+    public function user_order_data()
+    {
+        $u= Navbar::all();
+        $data= DB::table('course_orders')->join('course_order_products','course_orders.user_id','course_order_products.user_id')->get();
+        return view('front.user_order_data',Compact('u','data'));
+    }
    
 
    public function resetpass()

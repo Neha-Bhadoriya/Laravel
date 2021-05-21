@@ -66,10 +66,18 @@
 								<input type="text" id="phone-name" / name="phone">
 								<label for="email-address">Email Address*</label>
 								<input type="text" id="email-address" / name="email" value="{{Auth::user()->email }}">
-								<input type="text" name="user_id" value="{{Auth::user()->id}}">
-								<h2>Additional information</h2>
-								<label for="notes">Order notes (optional)</label>
-								<textarea id="notes" placeholder="Notes about your order, e.g. special notes for delivery" name="order_notes"></textarea>
+								<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+								<h2>Payment Methods</h2>
+<input class="cod" type="radio" name="payment_method" value="cod">CASH on Delivery
+<br>
+<input class="Paytm" type="radio" name="payment_method" value="Paytm">Paytm
+<br>
+<input class="Paypal" type="radio" name="payment_method" value="Paypal">Paypal
+<br>
+<input class="GooglePay" type="radio" name="payment_method" value="GooglePay">GooglePay
+<br>
+<input class="Phonepay" type="radio" name="payment_method" value="Phonepay">Phonepay
+								
 							
 						</div>
 					</div>								
@@ -102,7 +110,7 @@ x {{$c->course_quantity}}</td>
 <td class="total-price"><?php echo $total_amount;?></td>
 </tr></tbody></table>
 <!-- <a href="#" class="checkout-button">Proceed to complete</a> -->
-<input type="submit" name="submit" value="Proceed to complete" class="btn btn-warning">
+<input type="submit" name="submit" value="Proceed to complete" class="btn btn-warning" onclick="return selectpayment_method();">
 
 
 </div>
