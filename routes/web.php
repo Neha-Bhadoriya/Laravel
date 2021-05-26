@@ -183,4 +183,15 @@ Route::get('front/logout','FrontendController@front_logout');
 //Bill
 
 Route::get('admin/invoice/{id}','NavbarController@bill');
+//paytm route
 
+Route::post('/paytm-callback', 'CheckOutController@paytmCallback');
+
+Route::get('/clear', function() { 
+        Artisan::call('cache:clear');
+        Artisan::call('config:clear');
+        Artisan::call('config:cache');
+        Artisan::call('view:clear');
+        Artisan::call('route:clear'); 
+        return "Cleared!"; 
+    });

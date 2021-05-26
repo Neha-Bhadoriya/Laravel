@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Notification;
 use App\Navbar;
+
 class NotificationController extends Controller
 {
     public function notification()

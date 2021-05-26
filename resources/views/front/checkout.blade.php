@@ -31,20 +31,18 @@
 <form class="billing-details" method="post" action="{{url('front/ordersave')}}">
 	@csrf
 						
-								<div class="row">
-									<div class="col-lg-6">
-
-										<label for="first-name">Name*</label>
+<div class="row">
+<div class="col-lg-6">
+<label for="first-name">Name*</label>
 <input  name="name" type="text" id="first-name" / value="{{Auth::user()->name }}">
-									</div>
-									
-								</div>
+</div>
+</div>
 								
 <label for="country">Country*</label>
 <select id="country" name="country">
-									<option>Country...</option>
-									<option value="Albania">Albania</option>
-									<option value="USA">USA</option>
+<option>Country...</option>
+<option value="Albania">Albania</option>
+<option value="USA">USA</option>									
 									<option value="Canada">Canada</option>
 									<option value="Brazil">Brazil</option>
 									<option value="Germany">Germany</option>
@@ -67,7 +65,10 @@
 								<label for="email-address">Email Address*</label>
 								<input type="text" id="email-address" / name="email" value="{{Auth::user()->email }}">
 								<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+
+								
 								<h2>Payment Methods</h2>
+
 <input class="cod" type="radio" name="payment_method" value="cod">CASH on Delivery
 <br>
 <input class="Paytm" type="radio" name="payment_method" value="Paytm">Paytm
@@ -95,6 +96,7 @@
 	<?php $total_amount=0;?>									
 										<tr>
 @foreach($cart as $c)
+
 <td class="name-pro">{{$c->course_name}}
 x {{$c->course_quantity}}</td>
 <?php $total_amount=$total_amount+($c->course_price*$c->course_quantity);?>
@@ -108,6 +110,7 @@ x {{$c->course_quantity}}</td>
 <tr class="order-total">
 <th>Total</th>
 <td class="total-price"><?php echo $total_amount;?></td>
+<input type="hidden" name="total" value="<?php echo $total_amount; ?>" />
 </tr></tbody></table>
 <!-- <a href="#" class="checkout-button">Proceed to complete</a> -->
 <input type="submit" name="submit" value="Proceed to complete" class="btn btn-warning" onclick="return selectpayment_method();">
