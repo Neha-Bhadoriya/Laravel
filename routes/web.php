@@ -187,6 +187,12 @@ Route::get('admin/invoice/{id}','NavbarController@bill');
 
 Route::post('/paytm-callback', 'CheckOutController@paytmCallback');
 
+//search
+
+Route::post('front/search','FrontendController@search_course');
+
+//chache
+
 Route::get('/clear', function() { 
         Artisan::call('cache:clear');
         Artisan::call('config:clear');

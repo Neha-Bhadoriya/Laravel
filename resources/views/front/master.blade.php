@@ -108,9 +108,10 @@
 				</div>
 			</div>
 
-			<form class="search_bar">
+			<form class="search_bar" action="{{url('front/search')}}" method="post">
+				@csrf
 				<div class="container">
-					<input type="search" class="search-input" placeholder="What are you looking for...">
+					<input type="search" class="search-input" placeholder="What are you looking for..." name="search">
 					<button type="submit" class="submit">
 						<i class="material-icons">search</i>
 					</button>

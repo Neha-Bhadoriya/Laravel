@@ -47,6 +47,8 @@ $user_email=Auth::User()->email;
 
       $r=new Cart;
       $r->course_id=$a->course_id;
+      // print_r($r);
+      // die;
       $r->course_name=$a->course_name;
       $r->course_price=$a->course_price;
       $r->image=$a->course_image;

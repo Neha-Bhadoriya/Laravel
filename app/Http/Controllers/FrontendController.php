@@ -201,6 +201,19 @@ public function account()
   $u=Navbar::all();
     return view('front/resetpass',compact('u'));
      }
+
+
+ public function search_course(Request $request)
+    {
+      $u=Navbar::all();
+     
+      $search= $request->get('search');
+      //print($search);
+      $result= DB::table('courses')->where('course_name','like', '%'.$search.'%')->get();
+
+      return view('front.search_page',Compact('u','result'));
+      
+    }    
  }
       
 
