@@ -7,11 +7,13 @@ use Illuminate\Support\Str;
 use App\CheckOut;
 use App\Navbar;
 use App\Cart;
+use App\User;
 use App\CourseOrder;
 use Auth;
 use App\CourseOrderProduct;
 use DB;
 use App\Order;
+use Mail;
 class CheckOutController extends Controller
 {
     public function checkout()
@@ -69,8 +71,21 @@ $cartproduct=DB::table('carts')->where(['user_email'=>$a->email])->get();
 
 
     	if($t['payment_method']=="cod")
-    	{
-    		return redirect('front/thanks');
+    	{ 
+    $user = User::where('email',$a->email)->first();
+    //dd($user); 
+    $to =$a->email;
+    //dd($to);
+    $navbar = Navbar::all();
+    $corder = CourseOrder::all();
+    $corderd = CourseOrderProduct::all();
+    $id=$t->id;
+    $subject = 'User Order Successful';
+    $message = "Your Order Is Successful In PnInfosys Course Program \n\n";
+    Mail::send('front.order_email', ['msg' => $message,'navbar' => $navbar,'corder' => $corder,'corderd' => $corderd,'id' => $id, 'user' => $user] , function($message) use ($to){ 
+    $message->to($to, 'User')->subject('User Order');  
+            }); 
+    return redirect('front/thanks');
     	}
         elseif($t['payment_method']=="Paytm")
         {
