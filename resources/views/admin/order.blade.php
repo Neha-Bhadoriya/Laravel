@@ -47,15 +47,11 @@
   <tr>
 <tr>
         <th>S.No.</th>
-        <th>User Name</th>
-        <th>User Email</th>
-        <th>User Address</th>
-        <th>User City</th>
-        <th>User Pincode</th>
-        <th>User Phone</th>
-        <th>Course Name</th>
-        <th>Course Price</th>
-        <th>Course Quantity</th>
+        <th>Details</th>
+        <th>Course Order Date</th>
+        <th>Course Order Status</th>
+        <th>Payment Status</th>
+        <th>Payment Method</th>
         <th>Course Image</th>
         <th>Action</th>
 </tr>
@@ -63,15 +59,23 @@
 @foreach($users as $s)
 <tr class="text-secondary">
   <td>{{$i}}</td>
-  <td>{{$s->name}}</td>
-  <td>{{$s->user_email}}</td>
-  <td>{{$s->address}}</td>
-  <td>{{$s->city}}</td>
-  <td>{{$s->pincode}}</td>
-  <td>{{$s->phone}}</td>
-  <td>{{$s->course_name}}</td>
-  <td>{{$s->course_price}}</td>
-  <td>{{$s->course_quantity}}</td>
+  <td><b>Order no#:</b>{{$s->id}}<br>
+      <b>Name:</b>{{$s->name}}<br>
+      <b>Contact:</b>{{$s->phone}}<br>
+      <b>Email:</b>{{$s->user_email}}<br>
+      <b>City:</b>{{$s->city}}<br>
+      <b>Pincode:</b>{{$s->pincode}}<br>
+      <b>Course Name:</b>{{$s->course_name}}<br>
+      <b>Course Price:</b>{{$s->course_price}}<br>
+      <b>Course Quantity:</b>{{$s->course_quantity}}
+    </td>
+
+  <td>{{$s->created_at}}</td>
+  <td>{{$s->order_status}}</td>
+  
+  <td>{{$s->payment_status}}</td>
+  <td>{{$s->payment_method}}</td>
+
   <td>
     <img src="{{ url('/upload/'.$s->image) }}" style="height: 110px; width: 110px; border-radius: 100%;">
   </td>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\CheckOut;
 use App\Navbar;
 use App\Cart;
@@ -44,6 +45,7 @@ class CheckOutController extends Controller
     	$t->coupon_code=$a->coupon_code;
     	$t->coupon_amount=$a->coupon_amount;
     	$t->total=$a->total;
+        $t->order_id=Str::random(10);//unique string generate
     	$t->save();
     	$order_id=DB::getPdo()->lastinsertID();
 // print_r($order_id);
@@ -75,7 +77,7 @@ $cartproduct=DB::table('carts')->where(['user_email'=>$a->email])->get();
             // echo "Paytm";
          $amount=$a['total'];
          //print_r($amount);
-         $order_id=$order_id;
+         $order_id=$t['order_id'];
          //print_r($order_id);
 
          //paytm code start
@@ -125,19 +127,22 @@ public function handlePaytmRequest( $order_id, $amount ) {
     }
 
 public function paytmCallback( Request $request ) {
-            return $request;
+            //return $request;
+
+    $u=Navbar::all();
+    $c=Cart::all();
         $order_id = $request['ORDERID'];
 
         if ( 'TXN_SUCCESS' === $request['STATUS'] ) {
             $transaction_id = $request['TXNID'];
-            $order = Order::where( 'order_id', $order_id )->first();
+            $order = CourseOrder::where( 'order_id', $order_id )->first();
             $order->payment_status = 'complete';
             $order->transaction_id = $transaction_id;
             $order->save();
            
-           // $user_email = Auth::user()->email;
-           // DB::table('carts')->where('useremail',$user_email)->delete();
-            return view( 'order-complete', compact( 'order') );
+           $user_email = Auth::user()->email;
+           DB::table('carts')->where('user_email',$user_email)->delete();
+return view( 'front.order-complete', compact( 'order','u'));
            
 
         } else if( 'TXN_FAILURE' === $request['STATUS'] ){
