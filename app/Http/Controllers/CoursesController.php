@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Courses;
 use App\Catagory;
 use App\Navbar;
+use App\Rating;
+use App\User;
+use App\Cart;
 class CoursesController extends Controller
 {
    public function course()
@@ -131,9 +134,13 @@ class CoursesController extends Controller
      //frontend course details
 
      public function course_details($id)
-     {$u=Navbar::all();
+     {
+      $cart=Cart::all();
+      $u=Navbar::all();
+      $rate=Rating::all();
+      $user=User::all();
       $c=Courses::find($id);
-      return view('front.course_details',compact('u','c'));
+      return view('front.course_details',compact('u','c','rate','user','cart'));
      }
 }
 

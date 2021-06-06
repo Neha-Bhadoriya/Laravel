@@ -96,11 +96,44 @@
 									<i class="material-icons open-search">search</i> 
 									<i class="material-icons close-search">close</i>
 								</button>
+								@if(Auth::check())
+                                <a href="{{url('cart')}}">
 								<button class="shop-icon">
 									<i class="material-icons">shopping_cart</i>
-									<span class="studiare-cart-number">0</span>
-
+									<?php $count=0; ?>
+									@foreach($cart as $car)
+									@if(Auth::user()->email==$car->user_email)
+									<?php $count+=1; ?>
+									<span class="studiare-cart-number"><?php echo $count;?></span>
+									@endif
+									@endforeach
+									@if(($cart!=null)||($cart==null))
+									<span class="studiare-cart-number"><?php echo $count;?></span>
+									@endif
 								</button>
+								</a>
+								@endif
+								
+								@if(Auth::check())
+
+								@else
+								<?php $session_id = Session::getId(); ?>
+								<a href="{{url('cart')}}">
+								<button class="shop-icon">
+									<i class="material-icons">shopping_cart</i>
+									<?php $countt=0; ?>
+									@foreach($cart as $car)
+									@if($car->session_id==$session_id)
+									<?php $countt+=1; ?>
+									<span class="studiare-cart-number"><?php echo $countt;?></span>
+									@endif
+									@endforeach
+									@if(($cart!=null)||($cart!=null))
+									<span class="studiare-cart-number"><?php echo $countt;?></span>
+									@endif
+								</button>
+							    </a>
+								@endif
 
 							</div>
 						</div>

@@ -17,6 +17,8 @@ class AddToCartController extends Controller
 {
     public function add_to_cart(Request $a)
     {
+      Session::forget('coupanAmount');
+        Session::forget('coupanCode');
     	// echo "neha";
     	//print_r($a->all());
       if(Auth::check())
@@ -90,6 +92,8 @@ $session_id=Session::getId();
 
   public function quantity_update($id=null,$course_quantity=null)
   {
+    Session::forget('coupanAmount');
+        Session::forget('coupanCode');
     // echo $id;
     // echo $course_quantity;
     DB::table('carts')->where('id',$id)->increment('course_quantity',$course_quantity);

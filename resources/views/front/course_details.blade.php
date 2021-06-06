@@ -86,121 +86,183 @@
 										Student Reviews
 									</h3>
 								</div>
+								<?php
+								$i1=0;
+								$i2=0;
+								$i3=0;
+								$i4=0;
+								$i5=0;
+								$per=0;
+								$avg=0;
+								$sum=0;
+								?>
 								<div class="course-reviews-inner">
 									<div class="ratings-box">
-										<div class="rating-average">
-											<p>Average rating</p>
-											<div class="average-box">
-												<span class="num">4.5</span>
-												<span class="ratings">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-half-o"></i>
-												</span>
-												<span class="txt">2 Ratings</span>
-											</div>
-										</div>
 										<div class="detailed-rating">
 											<p>Detailed Rating</p>
 											<div class="detailed-box">
 												<ul class="detailed-lines">
 													<li>
 														<span>5 Stars</span>
+														@foreach($rate as $a)
+														@if($a->course_id==$c->id)
+														@if($a->rating=='5')
+														  <?php $i5++; ?>
+														@endif
+														@endif
+														@endforeach
+														<?php $per=($i5*100)/$c->count();
+														?>
 														<div class="outer">
-<span class="inner-fill" style="width: 50%"></span>
-</div>
-<span>1</span>
-</li>
-<li>
-<span>4 Stars</span>
-<div class="outer">
-<span class="inner-fill" style="width: 50%"></span>
-</div>
-														<span>1</span>
+															<span class="inner-fill" style="width: <?php echo $per; ?>%"></span>
+														</div>
+														<span><?php echo $i5; ?></span>
+													</li>
+													<li>
+														<span>4 Stars</span>
+														@foreach($rate as $a)
+														@if($a->course_id==$c->id)
+														@if($a->rating=='4')
+														  <?php $i4++; ?>
+														@endif
+														@endif
+														@endforeach
+														<?php $per=($i4*100)/$c->count();
+														?>
+														<div class="outer">
+															<span class="inner-fill" style="width: <?php echo $per; ?>%"></span>
+														</div>
+														<span><?php echo $i4; ?></span>
 													</li>
 													<li>
 														<span>3 Stars</span>
-<div class="outer">
-<span class="inner-fill"></span>
-</div>
-														<span>0</span>
+														@foreach($rate as $a)
+														@if($a->course_id==$c->id)
+														@if($a->rating=='3')
+														  <?php $i3++; ?>
+														@endif
+														@endif
+														@endforeach
+														<?php $per=($i3*100)/$c->count();
+														?>
+														<div class="outer">
+															<span class="inner-fill" style="width: <?php echo $per; ?>%"></span>
+														</div>
+														<span><?php echo $i3; ?></span>
 													</li>
 													<li>
 														<span>2 Stars</span>
+														@foreach($rate as $a)
+														@if($a->course_id==$c->id)
+														@if($a->rating=='2')
+														  <?php $i2++; ?>
+														@endif
+														@endif
+														@endforeach
+														<?php $per=($i2*100)/$c->count();
+														?>
 														<div class="outer">
-															<span class="inner-fill"></span>
+															<span class="inner-fill" style="width: <?php echo $per; ?>%"></span>
 														</div>
-														<span>0</span>
+														<span><?php echo $i2; ?></span>
 													</li>
 													<li>
 														<span>1 Stars</span>
+														@foreach($rate as $a)
+														@if($a->course_id==$c->id)
+														@if($a->rating=='1')
+														  <?php $i1++; ?>
+														@endif
+														@endif
+														@endforeach
+														<?php $per=($i1*100)/$c->count();
+														?>
 														<div class="outer">
-															<span class="inner-fill"></span>
+															<span class="inner-fill" style="width: <?php echo $per; ?>%"></span>
 														</div>
-														<span>0</span>
+														<span><?php echo $i1; ?></span>
 													</li>
 												</ul>
 											</div>
 										</div>
+
+										<div class="rating-average">
+											<p>Average rating</p>
+											<div class="average-box">
+												<?php $avg= ($i1*1)+($i2*2)+($i3*3)+($i4*4)+($i5*5);
+												$sum =$i1+$i2+$i3+$i4+$i5;
+												if($sum==0){
+													$sum=1;
+												}
+												$avg= $avg/$sum;
+												?>
+												<span class="num"><?php echo number_format($avg,1); ?></span>
+												<span class="ratings">
+													@for($i=1;$i<=round($avg);$i++)
+													<i class="fa fa-star"></i>
+													@endfor
+												</span>
+												<?php $count_num=0; ?>
+												@foreach($rate as $rat)
+										        @if($rat->course_id==$c->id)
+												  <?php $count_num+=1; ?>
+												@endif
+												@endforeach
+												<span class="txt"><?php echo $count_num; ?> Ratings</span>
+											</div>
+										</div>
 									</div>
+							
 									<ul class="comments">
+										@foreach($rate as $rat)
+										@if($rat->course_id==$c->id)
 										<li>
 											<div class="image-holder">
-												<img src="upload/blog/avatar4.jpg" alt="">
+												<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/1024px-User_icon_2.svg.png" alt="">
 											</div>
 											<div class="comment-content">
+												@foreach($user as $usr)
+												@if($rat->user_id==$usr->id)
 												<h2>
-													Steven Smith
+													{{$usr->name}}
 													<span class="rating">
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star-o"></i>
-</span>
-</h2>
-<p>top design</p>
-</div>
-</li>
-<li>
-											<div class="image-holder">
-												<img src="upload/blog/avatar4.jpg" alt="">
-											</div>
-											<div class="comment-content">
-												<h2>
-													Margaret
-													<span class="rating">
+														@for($i=1;$i<=($rat->rating);$i++)
 														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
+														@endfor
 													</span>
 												</h2>
-												<p>Easy to install, reasonable price!</p>
+												@endif
+												@endforeach
+												<p>{{$rat->message}}</p>
 											</div>
-</li>
-</ul>
-<form class="add-review">
+										</li>
+										@endif
+										@endforeach
+										
+									</ul>
+									@if(Auth::check())
+									<form class="add-review" method="post" action="{{url('front/review-rating/insert')}}">
+										@csrf
+										<input type="hidden" id="first-name" name="user_id" value="{{ Auth::user()->id }}" />
+										<input type="hidden" id="first-name" name="course_id" value="{{$c->id}}" />
 										<h1>Add a Review</h1>
 										<label>Your rating</label>
-										<select>
+										<select name="rating">
 											<option>Rate...</option>
-											<option>Perfect</option>
-											<option>Good</option>
-											<option>Average</option>
-											<option>Not that bad</option>
-											<option>Very Poor</option>
+											<option value="5">Perfect</option>
+											<option value="4">Good</option>
+											<option value="3">Average</option>
+											<option value="2">Not that bad</option>
+											<option value="1">Very Poor</option>
 										</select>
 										<label>Your Review</label>
-										<textarea></textarea>
+										<textarea name="message"></textarea>
 										<button type="submit">Submit</button>
-</form>
-</div>
-</div>
-<!-- end course reviews -->
+									</form>
+									@endif
+								</div>
+							</div>
+							<!-- end course reviews -->
 
 </div>
 

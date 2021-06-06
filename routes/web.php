@@ -191,6 +191,14 @@ Route::post('/paytm-callback', 'CheckOutController@paytmCallback');
 
 Route::post('front/search','FrontendController@search_course');
 
+//rating
+//Rating Route Work
+Route::post('front/review-rating/insert','FrontendController@insert_rating');
+
+
+//Coupan Route WorK
+Route::post('front/cart/apply-coupan','FrontendController@applyCoupan');
+
 //chache
 
 Route::get('/clear', function() { 

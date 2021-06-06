@@ -63,12 +63,15 @@
 <?php $total_amount=$total_amount+($c->course_price*$c->course_quantity);?>
 									</tr>
 						@endforeach
+									<form method="post" action="{{url('front/cart/apply-coupan')}}">
+									@csrf
 									<tr class="coupon-line"> 
 										<td colspan="6" class="actions">
-											<input type="text" name="coupon_code" placeholder="Coupon code">
-											<button type="submit">Update cart</button>
+											<input type="text" name="coupan_code" placeholder="Coupon code">
+											<button type="submit">Apply Coupon</button>
 										</td>
 									</tr>
+									</form>
 								</tbody>
 							</table>
 						</div>
@@ -78,16 +81,33 @@
 	<div class="widget cart-widget">
 <h2>Cart Totals</h2>
 	<table>
-<tbody>
-	<tr class="cart-subtotal">
-		<th>Subtotal</th>
-			<td><?php echo $total_amount;?></td>
-</tr>
-<tr class="order-total">
-<th>Total</th>
-<td><?php echo $total_amount;?></td>
-</tr>
-</tbody>
+@if(!empty(Session::get('coupanAmount')))
+									<tbody>
+										<tr class="cart-subtotal">
+											<th>Subtotal</th>
+											<td><?php echo $total_amount; ?></td>
+										</tr>
+										<tr class="cart-subtotal">
+											<th>Coupan Discount</th>
+											<td><?php echo Session::get('coupanAmount'); ?></td>
+										</tr>
+										<tr class="order-total">
+											<th>Total</th>
+											<td><?php echo $total_amount - Session::get('coupanAmount'); ?></td>
+										</tr>
+								    </tbody>
+								    @else
+								    <tbody>
+								        <tr class="cart-subtotal">
+											<th>Subtotal</th>
+											<td><?php echo $total_amount; ?></td>
+										</tr>
+								        <tr class="order-total">
+											<th>Total</th>
+											<td><?php echo $total_amount; ?></td>
+										</tr>
+									</tbody>
+									@endif
 </table>
 
 <!-- <a href="{{url('front/checkout')}}" class="checkout-button">Proceed to checkout</a> -->

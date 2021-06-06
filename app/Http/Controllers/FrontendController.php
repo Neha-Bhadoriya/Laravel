@@ -20,29 +20,33 @@ use App\CourseOrder;
 use App\CourseOrderProduct;
 use Session;
 use App\Cart;
+use App\Rating;
+use App\Coupon;
 use Illuminate\Support\Facades\Hash;
 class FrontendController extends Controller
 {
   public function index()
   {
+    $cart=Cart::all();
   	    $d=Banner::all();
   	    $u=Navbar::all();
   	    $c=Courses::all();
   	    $j=Catagory::all();
   	    $k=Bottom::all();
         $f=Notification::all();
-  return view('front.index',compact('d','u','c','j','k','f'));
+  return view('front.index',compact('d','u','c','j','k','f','cart'));
   	
   }
 
 public function courses()
   {
+    $cart=Cart::all();
         $d=Banner::all();
         $u=Navbar::all();
         $c=Courses::all();
         $j=Catagory::all();
         $k=Bottom::all();
-  return view('front.courses',compact('d','u','c','j','k'));
+  return view('front.courses',compact('d','u','c','j','k','cart'));
 }
 public function course_catagory($id)
   {
@@ -50,13 +54,16 @@ public function course_catagory($id)
         $u=Navbar::all();
         $c=Courses::all();
         $j=Catagory::find($id);
+        $cart=Cart::all();
         
-  return view('front.course_catagory',compact('u','c','j'));
+  return view('front.course_catagory',compact('u','c','j','cart'));
 }
 
 public function signup()
-{       $u=Navbar::all();
-  return view('front/signup',compact('u'));
+{   
+$cart=Cart::all();   
+ $u=Navbar::all();
+  return view('front/signup',compact('u','cart'));
 }
 
 public function signupsave(Request $a)
@@ -79,8 +86,10 @@ public function signupsave(Request $a)
 }
 
 public function login()
-{       $u=Navbar::all();
-  return view('front/login',compact('u'));
+{ 
+$cart=Cart::all();
+      $u=Navbar::all();
+  return view('front/login',compact('u','cart'));
 }
 public function loginsave(Request $b)
 {
@@ -114,29 +123,39 @@ else{
 }
 
 public function our_team()
-{       $u=Navbar::all();
+
+{ 
+$cart=Cart::all();
+      $u=Navbar::all();
         $m=OurTeam::all();
-  return view('front/our_team',compact('u','m'));
+  return view('front/our_team',compact('u','m','cart'));
 }
 
 public function placement()
-{       $u=Navbar::all();
+{
+$cart=Cart::all();
+       $u=Navbar::all();
         $p=Placement::all();
         
-  return view('front/placement',compact('u','p'));
+  return view('front/placement',compact('u','p','cart'));
 }
 public function intern()
-{       $u=Navbar::all();
+
+{ 
+  $cart=Cart::all();
+      $u=Navbar::all();
         $n=Intern::all();
         
-  return view('front/intern',compact('u','n'));
+  return view('front/intern',compact('u','n','cart'));
 }
 
 public function contact()
-{       $u=Navbar::all();
+{   
+$cart=Cart::all();
+    $u=Navbar::all();
         $a=Contact::all();
         
-  return view('front/contact',compact('u','a'));
+  return view('front/contact',compact('u','a','cart'));
 }
 
 public function contactsave(Request $c)
@@ -182,16 +201,19 @@ public function front_logout(Request $request)
 // }
 public function account()
     {
+
         $u=Navbar::all();
+        $cart=Cart::all();
         $data= DB::table('course_orders')->join('course_order_products','course_orders.user_id','course_order_products.user_id')->get();
-        return view('front/account',compact('u','data'));
+        return view('front/account',compact('u','data','cart'));
     }
 
     public function user_order_data()
     {
         $u= Navbar::all();
+        $cart=Cart::all();
         $data= DB::table('course_orders')->join('course_order_products','course_orders.user_id','course_order_products.user_id')->get();
-        return view('front.user_order_data',Compact('u','data'));
+        return view('front.user_order_data',Compact('u','data','cart'));
     }
    
 
@@ -199,21 +221,95 @@ public function account()
 
  {
   $u=Navbar::all();
-    return view('front/resetpass',compact('u'));
+  $cart=Cart::all();
+    return view('front/resetpass',compact('u','cart'));
      }
 
 
  public function search_course(Request $request)
     {
       $u=Navbar::all();
-     
+     $cart=Cart::all();
       $search= $request->get('search');
       //print($search);
       $result= DB::table('courses')->where('course_name','like', '%'.$search.'%')->get();
 
-      return view('front.search_page',Compact('u','result'));
+      return view('front.search_page',Compact('u','result','cart'));
       
-    }    
+    }  
+
+
+    public function insert_rating(Request $a)
+    {
+        $ir = new Rating();
+        $ir->user_id=$a->user_id;
+        $ir->course_id=$a->course_id;
+        $ir->rating=$a->rating;
+        $ir->message=$a->message;
+        $ir->save();
+        if($ir)
+        {
+            return redirect()->back()->with('message','Rating successfully Given');
+        }
+    } 
+
+
+    public function applyCoupan(Request $request)
+    {
+        Session::forget('coupanAmount');
+        Session::forget('coupanCode');
+      if($request->isMethod('post'))
+      {
+        $data = $request->all();
+        // echo "<pre>";
+        // print_r($data);
+        // die;
+        $coupancount= Coupon::where('coupon_code',$data['coupan_code'])->count();
+        if($coupancount==0)
+        {
+            return redirect()->back()->with('message','Coupon Code does not exists');
+        }
+        else
+        {
+            // echo "success";die;
+            $coupanDetails = Coupon::where('coupon_code',$data['coupan_code'])->first();
+            $expiry_date = $coupanDetails->expiry_date;
+            $current_date = date('Y-m-d');
+            if($expiry_date < $current_date)
+            {
+              return redirect()->back()->with('message','Coupon Code is Expired');  
+            }
+            //Coupan is ready for discount
+            $session_id = Session::getId();
+            $userCart = Cart::where('session_id',$session_id)->get();
+            $total_amount = 0;
+            foreach($userCart as $item)
+            {
+                $total_amount = $total_amount + ($item->course_price*$item->course_quantity);
+            }
+            //check if counpon amount is fixed or percentage
+            if($coupanDetails->amount_type=="fixed")
+            {
+                $coupanAmount = $coupanDetails->amount;
+                // print_r($coupanAmount);
+                // die;
+                //Add coupan Code in session
+            Session::put('coupanAmount',$coupanAmount);
+            Session::put('coupanCode',$data['coupan_code']);
+            // echo Session::get('coupanAmount');die;
+            return redirect()->back()->with('message','Coupon Code is Successfully Applied. You are Availing Discount');
+            }
+            else
+            {
+              $coupanAmount = $total_amount * ($coupanDetails->amount/100);  
+              //Add coupan Code in session
+            Session::set('coupanAmount',$coupanAmount);
+            Session::set('coupanCode',$data['coupan_code']);
+            return redirect()->back()->with('message','Coupon Code is Successfully Applied. You are Availing Discount');
+            }
+        }
+      }
+    }
  }
       
 
