@@ -416,10 +416,11 @@ function callRefundAPI($refundApiURL, $requestParamList) {
 
 public function thanks()
 {
+    $cart=Cart::all();
     $u=Navbar::all();
     $user_email=Auth::user()->email;
     DB::table('carts')->where('user_email',$user_email)->delete();
-return view('front/thanks',compact('u'));
+return view('front/thanks',compact('u','cart'));
 }
 
 

@@ -80,7 +80,9 @@
     <img src="{{ url('/upload/'.$s->image) }}" style="height: 110px; width: 110px; border-radius: 100%;">
   </td>
 <td>
+   <button class="btn btn-danger btn-sm"><a class="text-white" href="{{url('admin/invoice/' .$s->id)}}">View</a></button>
   <button class="btn btn-danger btn-sm"><a class="text-white" href="{{url('admin/invoice/' .$s->id)}}">Invoice</a></button>
+
 </td>
 </tr>
 <?php $i++;?>

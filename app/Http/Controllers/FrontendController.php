@@ -78,6 +78,7 @@ public function signupsave(Request $a)
   $r->name=$a->name;
   $r->email=$a->email;
   $r->password=Hash::make($a->password);
+  $r->role=1;
   $r->save();
   if($a)
   {
@@ -114,6 +115,7 @@ $session_id=Session::getId();
   $data=$b->all();
 if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password']]))
 {
+  Session::put('neha',$data['email']);
 Cart::where('session_id',$session_id)->update(['user_email'=>$data['email']]);
 return redirect("cart")->with('message','Login Successfully');
         }

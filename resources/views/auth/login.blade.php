@@ -28,10 +28,11 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form method="POST" action="{{ route('login') }}">
+      <form method="POST" action="{{url('front/loginsave')}}">
                         @csrf
 
         <div class="input-group mb-3">
+          <input type="hidden" name="role" value="0">
            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
             @error('email')
@@ -85,6 +86,7 @@
         @endif
         
       </p>
+      <a href="{{ url('auth/google') }}" class="btn btn-info">Login With Google</a>
       <p class="mb-0">
         <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
       </p>

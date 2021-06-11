@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::group(['middleware' =>['auth']],function(){
 
 //admin 
 Route::get('admin','AdminController@index');
@@ -121,7 +122,7 @@ Route::get('front/xiaomi','WorkshopController@Xiaomi_workshop');
 Route::get('front/bentchair','WorkshopController@Bentchair_workshop');
 Route::get('front/mpct','WorkshopController@Mpct_workshop');
 Route::get('front/rjit','WorkshopController@Rjit_workshop');
-
+});//middleware close
 //add to cart
 Route::post('add_to_cart','AddToCartController@add_to_cart');
 Route::get('cart','AddToCartController@cart');
@@ -151,12 +152,14 @@ Route::get('front/intern','FrontendController@intern');
 Route::get('front/contact','FrontendController@contact');
 
 Route::post('front/contactsave','FrontendController@contactsave');
-
+//front security
+Route::group(['middleware' =>['FrontLogin']],function(){
 //Account
 Route::get('front/account','FrontendController@account');
 //user order data
 Route::get('front/user_order_data','FrontendController@user_order_data');
 Route::get('front/resetpass','FrontendController@resetpass');
+});//end security
 
 
 //checkout
@@ -198,6 +201,11 @@ Route::post('front/review-rating/insert','FrontendController@insert_rating');
 
 //Coupan Route WorK
 Route::post('front/cart/apply-coupan','FrontendController@applyCoupan');
+
+//google
+Route::get('auth/google', 'Auth\GoogleController@redirectToGoogle');
+Route::get('auth/google/callback', 'Auth\GoogleController@handleGoogleCallback');
+
 
 //chache
 

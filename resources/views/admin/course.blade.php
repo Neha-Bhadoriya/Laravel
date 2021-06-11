@@ -57,7 +57,7 @@
         <th>Action</th>
 </tr>
 <?php $i=1;?>
-@foreach($d as $s)
+@foreach($u as $s)
 <tr class="text-secondary">
   <td>{{$i}}</td>
   <td>{{$s->course_name}}</td>
@@ -67,7 +67,7 @@
    <td>{{$s->course_includes}}</td>
   <td>{{$s->course_content}}</td>
   <td><img src="{{ url('/upload/'.$s->course_image) }}" style="height: 110px; width: 110px; border-radius: 100%;"></td>
-  <td>{{$s->c_name}}</td>
+  <td>{{$s->course_catagory}}</td>
   <td>
     <button class="btn btn-success btn-sm"><a class="text-white"href="{{url('admin/show/'.$s->id)}}">Show</a></button>
 
