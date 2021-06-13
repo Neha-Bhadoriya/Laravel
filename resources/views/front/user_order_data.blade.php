@@ -23,6 +23,7 @@
                 </thead>
                 <tbody>
                   @foreach($data as $d)
+                  @if(Auth::check())
                   @if(Auth::user()->name==$d->name)
                     <tr class="bg-light">
                       <td>{{$d->name}}</td>
@@ -32,6 +33,7 @@
                       <td><img src="{{ url('/upload/'.$d->image) }}" style="height: 100px; width: 120px; border-radius: 100%;"></td>
                       <td>{{$d->course_price*$d->course_quantity}}</td>
                     </tr>
+                  @endif
                   @endif
                   @endforeach
 

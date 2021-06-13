@@ -113,14 +113,29 @@ public function loginsave(Request $b)
 
 $session_id=Session::getId();
   $data=$b->all();
-if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password']]))
+  $check_role=User::where('email',$data['email'])->first();
+if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password'],'role'=>$data['role']]))
 {
-  Session::put('neha',$data['email']);
+  if($check_role->role==0)
+  {
+    return redirect('/admin');
+
+  }
+  elseif($check_role->role==1)
+  {
+    Session::put('neha',$data['email']);
 Cart::where('session_id',$session_id)->update(['user_email'=>$data['email']]);
 return redirect("cart")->with('message','Login Successfully');
-        }
+
+  }
+  else
+  {
+
+  }}
+        
 else{
-  return redirect("front/login")->with('message','Login Unsuccessfully please try again and check the login details again');
+   return redirect()->back();
+  // return redirect("front/login")->with('message','Login Unsuccessfully please try again and check the login details again');
     }  
 }
 
@@ -190,6 +205,7 @@ public function contactsave(Request $c)
 
 public function front_logout(Request $request)
  {
+  Session::forget('neha');
         Auth::logout();
         return redirect('front/login');
      }
