@@ -228,6 +228,7 @@ style="padding-right: 17px;
 				</div>
 				<!--  -->
 				<div class="collection-box">
+					
 					<div class="row">
 						<?php $i=1; ?>
 						@foreach ($j as $t)
@@ -238,7 +239,13 @@ style="padding-right: 17px;
 										<img src="{{ url('/catagory/'.$t->c_image) }}"  alt="" >
 										<a href="{{url('front/course_catagory/'.$t->id)}}" class="hover-post" >
 											<span class="title">{{$t->c_name}}</span>
-											<span class="numb-courses">3 Courses</span>
+											<?php $count=0; ?>
+										@foreach($c as $crs)
+										@if($t->c_name==$crs->course_catagory)
+										<?php $count+=1; ?>
+										@endif
+										@endforeach
+											<span class="numb-courses"><?php echo $count; ?> Courses</span>
 										</a>
 									</div>
 								</div>
@@ -250,7 +257,13 @@ style="padding-right: 17px;
 										<img src="{{ url('/catagory/'.$t->c_image) }}" style="    height: 140px;" alt="">
 										<a href="{{url('front/course_catagory/'.$t->id)}}" class="hover-post">
 											<span class="title">{{$t->c_name}}</span>
-											<span class="numb-courses">2 Courses</span>
+											<?php $count=0; ?>
+										@foreach($c as $crs)
+										@if($t->c_name==$crs->course_catagory)
+										<?php $count+=1; ?>
+										@endif
+										@endforeach
+											<span class="numb-courses"><?php echo $count; ?> Courses</span>
 										</a>
 									</div>
 								</div>
@@ -260,7 +273,13 @@ style="padding-right: 17px;
 										<img src="{{ url('/catagory/'.$t->c_image) }}"  style="    height: 140px;" alt="">
 										<a href="{{url('front/course_catagory/'.$t->id)}}" class="hover-post">
 											<span class="title">{{$t->c_name}}</span>
-											<span class="numb-courses">3 Courses</span>
+											<?php $count=0; ?>
+										@foreach($c as $crs)
+										@if($t->c_name==$crs->course_catagory)
+										<?php $count+=1; ?>
+										@endif
+										@endforeach
+											<span class="numb-courses"><?php echo $count; ?> Courses</span>
 										</a>
 									</div>
 								</div>
@@ -272,7 +291,13 @@ style="padding-right: 17px;
 										<img src="{{ url('/catagory/'.$t->c_image) }}" style="    height: 140px;" alt="">
 										<a href="{{url('front/course_catagory/'.$t->id)}}" class="hover-post">
 											<span class="title">{{$t->c_name}}</span>
-											<span class="numb-courses">3 Courses</span>
+											<?php $count=0; ?>
+										@foreach($c as $crs)
+										@if($t->c_name==$crs->course_catagory)
+										<?php $count+=1; ?>
+										@endif
+										@endforeach
+											<span class="numb-courses"><?php echo $count; ?> Courses</span>
 										</a>
 									</div>
 								</div>
@@ -282,7 +307,13 @@ style="padding-right: 17px;
 										<img src="{{ url('/catagory/'.$t->c_image) }}" style="    height: 140px;" alt="">
 										<a href="{{url('front/course_catagory/'.$t->id)}}" class="hover-post">
 											<span class="title">{{$t->c_name}}</span>
-											<span class="numb-courses">3 Courses</span>
+											<?php $count=0; ?>
+										@foreach($c as $crs)
+										@if($t->c_name==$crs->course_catagory)
+										<?php $count+=1; ?>
+										@endif
+										@endforeach
+											<span class="numb-courses"><?php echo $count; ?> Courses</span>
 										</a>
 									</div>
 								</div>

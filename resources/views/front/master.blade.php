@@ -62,39 +62,36 @@
 		<!-- Header
 		    ================================================== -->
 		    
-		<header class="clearfix">
+<header class="clearfix">
 
-			<div class="top-line" style="background-color: #009df2!important;"> 
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-6">
-							@foreach($u as $n)
-							<p><i class="material-icons ">phone</i> <span class="text-white">{{$n->number}}</span></p>
-							<p><i class="material-icons ">email</i> <span class="text-white">{{$n->email}}</span></p>
-							@if(Auth::check())
-							<p class="text-white">{{Auth::user()->name}}</p>
-									@endif
+<div class="top-line" style="background-color: #009df2!important;"> 
+<div class="container">
+<div class="row">
+<div class="col-lg-6">
+@foreach($u as $n)
+<p><i class="material-icons ">phone</i> <span class="text-white">{{$n->number}}</span></p>
+<p><i class="material-icons ">email</i> <span class="text-white">{{$n->email}}</span></p>
+@if(Auth::check())
+<p class="text-white">{{Auth::user()->name}}</p>
+@endif
+@if(Auth::check())
+<button>
+<a href="{{url('front/logout')}}" class=" btn btn-primary ">Logout</a>
+</button>
+@endif
+@endforeach
+</div>
+<div class="col-lg-6">
+<div class="right-top-line">
+<ul class="top-menu">
 
-									@if(Auth::check())
-									<button>
-									<a href="{{url('front/logout')}}" class=" btn btn-primary ">Logout</a>
-								    </button>
-									@endif
-							@endforeach
-						</div>
-						<div class="col-lg-6">
-							<div class="right-top-line">
-								<ul class="top-menu">
-									
-
-									<li><a href="{{url('front/account')}}" class="text-white">Account</a></li>
-									
-									<li><a href="about.html" class="text-white">About</a></li>
-									<li><a href="blog.html" class="text-white">News</a></li>
-								</ul>
-								<button class="search-icon">
-									<i class="material-icons open-search">search</i> 
-									<i class="material-icons close-search">close</i>
+<li><a href="{{url('front/account')}}" class="text-white">Account</a></li>
+<li><a href="about.html" class="text-white">About</a></li>
+<li><a href="blog.html" class="text-white">News</a></li>
+</ul>
+<button class="search-icon">
+<i class="material-icons open-search">search</i> 
+<i class="material-icons close-search">close</i>
 								</button>
 								@if(Auth::check())
                                 <a href="{{url('cart')}}">

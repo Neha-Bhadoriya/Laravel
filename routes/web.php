@@ -114,19 +114,25 @@ Route::post('admin/coupon_save','CouponController@coupon_save');
 Route::get('admin/coupon_edit/{id}','CouponController@coupon_edit');
 Route::post('admin/coupon_update','CouponController@coupon_update');
 Route::get('admin/coupon_delete/{id}','CouponController@coupon_delete');
-//course frontended
-Route::get('course_details/{id}','CoursesController@course_details');
 
-// workshopMPct front
-Route::get('front/xiaomi','WorkshopController@Xiaomi_workshop');
-Route::get('front/bentchair','WorkshopController@Bentchair_workshop');
-Route::get('front/mpct','WorkshopController@Mpct_workshop');
-Route::get('front/rjit','WorkshopController@Rjit_workshop');
+//invoice
+Route::get('admin/invoice/{id}','CheckOutController@invoice');
+
+
+//Bill
+Route::get('admin/invoice/{id}','NavbarController@bill');
+
+
+//order
+Route::get('admin/order','CheckOutController@order');
+
+//admin part close
+
 });//middleware close
-//add to cart
-Route::post('add_to_cart','AddToCartController@add_to_cart');
-Route::get('cart','AddToCartController@cart');
-Route::get('cart/quantity_update/{id}/{course_quantity}','AddToCartController@quantity_update');
+
+
+//frontend start
+
 
 
 //front
@@ -143,15 +149,30 @@ Route::post('front/signupsave','FrontendController@signupsave');
 Route::get('front/login','FrontendController@login');
 
 Route::post('front/loginsave','FrontendController@loginsave');
+//course frontended
+Route::get('course_details/{id}','CoursesController@course_details');
 
+// workshopMPct front
+Route::get('front/xiaomi','WorkshopController@Xiaomi_workshop');
+Route::get('front/bentchair','WorkshopController@Bentchair_workshop');
+Route::get('front/mpct','WorkshopController@Mpct_workshop');
+Route::get('front/rjit','WorkshopController@Rjit_workshop');
 
 Route::get('front/our_team','FrontendController@our_team');
 Route::get('front/placement','FrontendController@placement');
 Route::get('front/intern','FrontendController@intern');
 
+//add to cart
+Route::post('add_to_cart','AddToCartController@add_to_cart');
+Route::get('cart','AddToCartController@cart');
+Route::get('cart/quantity_update/{id}/{course_quantity}','AddToCartController@quantity_update');
+
+
 Route::get('front/contact','FrontendController@contact');
 
 Route::post('front/contactsave','FrontendController@contactsave');
+
+
 //front security
 Route::group(['middleware' =>['FrontLogin']],function(){
 //Account
@@ -166,15 +187,11 @@ Route::get('front/resetpass','FrontendController@resetpass');
 Route::get('front/checkout','CheckOutController@checkout');
 Route::post('front/ordersave','CheckOutController@ordersave');
 
-//invoice
 
-Route::get('admin/invoice/{id}','CheckOutController@invoice');
-
-//order
-
-Route::get('admin/order','CheckOutController@order');
 //thanks
 Route::get('front/thanks','CheckOutController@thanks');
+
+
 //Auth
 Auth::routes();
 
@@ -183,9 +200,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 //logout front
 Route::get('front/logout','FrontendController@front_logout');
 
-//Bill
 
-Route::get('admin/invoice/{id}','NavbarController@bill');
 //paytm route
 
 Route::post('/paytm-callback', 'CheckOutController@paytmCallback');

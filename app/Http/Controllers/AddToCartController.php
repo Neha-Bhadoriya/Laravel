@@ -15,6 +15,36 @@ use DB;
 use Auth;
 class AddToCartController extends Controller
 {
+
+  public function cart()
+  {
+$session_id=Session::getId();
+// print_r($session_id);
+// die;
+      $u= Navbar::all();
+
+      //$cart=Cart::where('session_id',$session_id)->get();
+      //$user_email=Auth::User()->email;
+      //print_r($user_email);
+      //die;
+
+      if(Auth::check())
+      {
+       $user_email=Auth::User()->email; 
+       $cart=Cart::where('user_email',$user_email)->get();
+      //  print_r($user_email);
+      //  print_r($cart);
+      // die;
+      }
+      else{
+        $session_id=Session::getId();
+      $cart=Cart::where('session_id',$session_id)->get();
+      // print_r($cart);
+      // die;
+    }
+    return view('front/add_to_cart',compact('u','cart'));
+  }
+
     public function add_to_cart(Request $a)
     {
       Session::forget('coupanAmount');
@@ -64,31 +94,7 @@ $user_email=Auth::User()->email;
       }
     }
   }
-  public function cart()
-  {
-$session_id=Session::getId();
-// print_r($session_id);
-// die;
-  	  $u= Navbar::all();
-
-  	  //$cart=Cart::where('session_id',$session_id)->get();
-      // $user_email=Auth::User()->email;
-      // print_r($user_email);
-      // die;
-
-      if(Auth::check())
-      {
-       $user_email=Auth::User()->email; 
-       $cart=Cart::where('user_email',$user_email)->get();
-      }
-      else{
-        $session_id=Session::getId();
-      $cart=Cart::where('session_id',$session_id)->get();
-      // print_r($cart);
-      // die;
-    }
-  	return view('front/add_to_cart',compact('u','cart'));
-  }
+  
 
   public function quantity_update($id=null,$course_quantity=null)
   {
